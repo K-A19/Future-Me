@@ -1,8 +1,30 @@
+.main-logo {
+  position: absolute;
+  /* Smaller numbers = closer to the corner */
+  top: 15px; 
+  left: 15px;
+  
+  /* Increased size */
+  width: 250px; 
+  height: auto;
+  
+  z-index: 100; /* High z-index to stay above the panels */
+  
+  /* Optional: smoothing for the hover effect */
+  transition: transform 0.3s ease;
+}
+
+/* Optional: subtle grow effect when hovering near the corner */
+.main-logo:hover {
+  transform: scale(1.05);
+}
 .customizer-container {
+  position: relative;
   display: flex;
   height: 100vh;
-  background-color: #050505;
-  color: white;
+  background-color: #cc6d5e; /* Your Terracotta Base */
+  color: #3d231f; /* Deep chocolate brown for readability */
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
   overflow: hidden;
 }
 
@@ -12,7 +34,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
+  /* A soft warm glow to make the avatar pop from the clay background */
+  background: radial-gradient(circle, rgba(255,235,220,0.3) 0%, rgba(204,109,94,0) 70%);
 }
 
 .control-side {
@@ -21,66 +44,90 @@
   flex-direction: column;
   justify-content: center;
   padding: 0 60px;
-  border-left: 1px solid #222;
+  /* Creamy, paper-like background */
+  background-color: #fff9f5; 
+  border-left: 1px solid rgba(61, 35, 31, 0.1);
+  box-shadow: -15px 0 40px rgba(0,0,0,0.1);
 }
 
 .menu-title {
-  font-size: 1rem;
-  letter-spacing: 8px;
-  color: #666;
+  font-size: 1.4rem;
+  letter-spacing: 6px;
+  color: #cc6d5e;
   margin-bottom: 50px;
   text-align: center;
   text-transform: uppercase;
+  font-weight: 800;
 }
 
 .selector-wrapper {
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .arrow-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #222; /* Clean underline style */
-  padding-bottom: 10px;
+  border-bottom: 2px solid #ecd5d0; /* Soft warm divider */
+  padding-bottom: 12px;
+  transition: border-color 0.3s ease;
+}
+
+.arrow-row:hover {
+  border-color: #cc6d5e;
 }
 
 .fixed-label {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 3px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
   text-align: center;
   flex: 1;
+  color: #5a3a35;
 }
 
 .arrow-btn {
-  background: none;
+  background: #cc6d5e;
   border: none;
-  color: #fff;
-  font-size: 2.5rem;
+  color: #fff9f5;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  width: 50px;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px; /* Slightly rounded squares fit this "earthy" look better */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .arrow-btn:hover {
-  color: #00d4ff;
-  transform: scale(1.2);
+  background: #3d231f;
+  transform: scale(1.1);
 }
 
 .save-button {
   margin-top: 50px;
-  padding: 18px 60px;
-  background: transparent;
-  color: #fff;
-  border: 2px solid #fff;
+  padding: 16px 50px;
+  background: #cc6d5e;
+  color: white;
+  border: none;
+  border-radius: 12px;
   font-weight: bold;
   letter-spacing: 2px;
+  font-size: 1rem;
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: 0 8px 0px #a15447; /* "3D" Button effect */
 }
 
 .save-button:hover {
-  background: #fff;
-  color: #000;
+  background: #b55d4f;
+  transform: translateY(2px);
+  box-shadow: 0 4px 0px #a15447;
+}
+
+.save-button:active {
+  transform: translateY(8px);
+  box-shadow: none;
 }

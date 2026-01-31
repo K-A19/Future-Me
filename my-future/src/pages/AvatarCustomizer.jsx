@@ -55,7 +55,14 @@ const AvatarCustomizer = () => {
   };
 
   return (
+    
    <div className="customizer-container">
+      {/* THE LOGO */}
+        <img 
+        src="../../images/futuremelogo.png" 
+        alt="Future Me Logo" 
+        className="main-logo" 
+        />
       {/* LEFT SIDE: PREVIEW */}
       <div className="preview-side">
         <div className="avatar-wrapper">
