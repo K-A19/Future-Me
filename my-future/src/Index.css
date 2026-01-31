@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  background-color: #87CEEB;
+}
+
+.game-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-image {
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
+  display: block;
+  border: 8px solid #8B6914;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.clickable-area {
+  position: absolute;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+.clickable-area:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-color: #FFD700;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+}
+
+.clickable-area:active {
+  transform: scale(0.98);
+}
+
+/* Position buttons based on the map layout */
+.school-btn {
+  top: 20%;
+  left: 15%;
+  width: 18%;
+  height: 35%;
+}
+
+.home-btn {
+  bottom: 22%;
+  left: 8%;
+  width: 15%;
+  height: 25%;
+}
+
+.grocery-btn {
+  top: 18%;
+  right: 25%;
+  width: 20%;
+  height: 28%;
+}
+
+.office-btn {
+  bottom: 18%;
+  right: 15%;
+  width: 22%;
+  height: 30%;
+}
+
+.location-label {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 215, 0, 0.9);
+  color: #333;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.clickable-area:hover .location-label {
+  opacity: 1;
+}
+
+.title {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 15px 40px;
+  border-radius: 30px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #2c3e50;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 20px;
+    padding: 10px 25px;
+  }
+  
+  .location-label {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
