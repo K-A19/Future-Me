@@ -1,26 +1,23 @@
-import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Home from './pages/Home'
-import School from './pages/School'
-import Grocery from './pages/Grocery'
-import Office from '.pages/Office'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Index from './Index';
+import Home from './Home';
+import Grocery from './Grocery';
+import Office from './Office';
+import School from './School';
 
 function App() {
-  
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/school" element={<School />} />
         <Route path="/grocery" element={<Grocery />} />
         <Route path="/office" element={<Office />} />
+        <Route path="/school" element={<School />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
