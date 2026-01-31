@@ -1,7 +1,7 @@
 .back-button {
   position: absolute;
   top: 20px;
-  left: 220px;
+  right: 220px;
   background-color: rgba(255, 255, 255, 0.9);
   color: #333;
   padding: 12px 24px;
@@ -15,7 +15,7 @@
 
 .back-button:hover {
   background-color: white;
-  transform: translateX(-5px);
+  transform: translateX(5px);
 }
 
 .header {
