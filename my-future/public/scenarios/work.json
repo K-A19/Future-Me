@@ -1,0 +1,55 @@
+{
+  "id": "work",
+  "title": "EARN ADVENTURE",
+  "subtitle": "You earned some money this week.",
+  "steps": [
+    {
+      "step": 1,
+      "prompt": "You get paid. What do you think first?",
+      "options": [
+        { "id": "spend", "label": "Spend it", "icon": "🎮" },
+        { "id": "save", "label": "Save it", "icon": "💰" }
+      ]
+    },
+    {
+      "step": 2,
+      "prompt": "A friend wants to hang out.",
+      "options": [
+        { "id": "go_out", "label": "Go out", "icon": "🍕" },
+        { "id": "stay_in", "label": "Stay in", "icon": "🏠" }
+      ]
+    },
+    {
+      "step": 3,
+      "prompt": "You see something you want online.",
+      "options": [
+        { "id": "buy", "label": "Buy it", "icon": "🛍️" },
+        { "id": "wait", "label": "Wait", "icon": "⏳" }
+      ]
+    },
+    {
+      "step": 4,
+      "prompt": "You remember a goal.",
+      "options": [
+        { "id": "goal", "label": "Save for goal", "icon": "🎯" },
+        { "id": "forget", "label": "Forget it", "icon": "🙈" }
+      ]
+    },
+    {
+      "step": 5,
+      "prompt": "You get another small payment.",
+      "options": [
+        { "id": "split", "label": "Save some", "icon": "⚖️" },
+        { "id": "spend_all", "label": "Spend all", "icon": "💸" }
+      ]
+    },
+    {
+      "step": 6,
+      "prompt": "End of the week.",
+      "options": [
+        { "id": "reflect", "label": "Feel proud", "icon": "😊" },
+        { "id": "regret", "label": "Wish you saved more", "icon": "😬" }
+      ]
+    }
+  ]
+}
