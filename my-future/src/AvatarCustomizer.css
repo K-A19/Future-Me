@@ -1,0 +1,86 @@
+.customizer-container {
+  display: flex;
+  height: 100vh;
+  background-color: #050505;
+  color: white;
+  overflow: hidden;
+}
+
+.preview-side {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle, #1a1a1a 0%, #050505 100%);
+}
+
+.control-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 60px;
+  border-left: 1px solid #222;
+}
+
+.menu-title {
+  font-size: 1rem;
+  letter-spacing: 8px;
+  color: #666;
+  margin-bottom: 50px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.selector-wrapper {
+  margin-bottom: 25px;
+}
+
+.arrow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #222; /* Clean underline style */
+  padding-bottom: 10px;
+}
+
+.fixed-label {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-align: center;
+  flex: 1;
+}
+
+.arrow-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 50px;
+}
+
+.arrow-btn:hover {
+  color: #00d4ff;
+  transform: scale(1.2);
+}
+
+.save-button {
+  margin-top: 50px;
+  padding: 18px 60px;
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  font-weight: bold;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.save-button:hover {
+  background: #fff;
+  color: #000;
+}
