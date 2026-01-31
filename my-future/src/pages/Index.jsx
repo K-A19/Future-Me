@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Index.css';
+import '../Index.css';
 
 const Index = () => {
   const handleLocationClick = (location) => {
