@@ -1,0 +1,55 @@
+{
+  "id": "groceries",
+  "title": "FOOD ADVENTURE",
+  "subtitle": "You’re helping your family with food choices this week.",
+  "steps": [
+    {
+      "step": 1,
+      "prompt": "You enter the store. What do you grab first?",
+      "options": [
+        { "id": "snacks", "label": "Snacks", "icon": "🍭" },
+        { "id": "produce", "label": "Fruits & veggies", "icon": "🍎" }
+      ]
+    },
+    {
+      "step": 2,
+      "prompt": "You walk down another aisle. What now?",
+      "options": [
+        { "id": "soda", "label": "Soda", "icon": "🥤" },
+        { "id": "water", "label": "Water", "icon": "💧" }
+      ]
+    },
+    {
+      "step": 3,
+      "prompt": "Dinner time is coming. What do you pick?",
+      "options": [
+        { "id": "instant", "label": "Instant noodles", "icon": "🍜" },
+        { "id": "cook", "label": "Simple home meal", "icon": "🍚" }
+      ]
+    },
+    {
+      "step": 4,
+      "prompt": "You see a sale. What do you do?",
+      "options": [
+        { "id": "bulk", "label": "Buy food that lasts", "icon": "🛒" },
+        { "id": "treat", "label": "Buy a treat", "icon": "🍪" }
+      ]
+    },
+    {
+      "step": 5,
+      "prompt": "You’re almost done shopping.",
+      "options": [
+        { "id": "budget", "label": "Stick to the plan", "icon": "📋" },
+        { "id": "extra", "label": "Add extra items", "icon": "➕" }
+      ]
+    },
+    {
+      "step": 6,
+      "prompt": "At checkout. One last choice.",
+      "options": [
+        { "id": "store_brand", "label": "Choose store brand", "icon": "🏷️" },
+        { "id": "name_brand", "label": "Choose name brand", "icon": "⭐" }
+      ]
+    }
+  ]
+}

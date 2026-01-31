@@ -1,0 +1,55 @@
+{
+  "id": "school",
+  "title": "SCHOOL ADVENTURE",
+  "subtitle": "You’re going through a school week and making choices.",
+  "steps": [
+    {
+      "step": 1,
+      "prompt": "It’s the morning before school. What do you do?",
+      "options": [
+        { "id": "pack_lunch", "label": "Pack lunch", "icon": "🥪" },
+        { "id": "buy_lunch", "label": "Buy lunch at school", "icon": "🍕" }
+      ]
+    },
+    {
+      "step": 2,
+      "prompt": "You’re getting ready for class.",
+      "options": [
+        { "id": "bring_supplies", "label": "Bring school supplies", "icon": "📘" },
+        { "id": "forget_supplies", "label": "Forget supplies", "icon": "🙈" }
+      ]
+    },
+    {
+      "step": 3,
+      "prompt": "After school, you have free time.",
+      "options": [
+        { "id": "do_homework", "label": "Do homework", "icon": "📖" },
+        { "id": "play_games", "label": "Play games", "icon": "🎮" }
+      ]
+    },
+    {
+      "step": 4,
+      "prompt": "You need something for school tomorrow.",
+      "options": [
+        { "id": "buy_item", "label": "Buy it now", "icon": "🛍️" },
+        { "id": "wait", "label": "Wait and plan", "icon": "⏳" }
+      ]
+    },
+    {
+      "step": 5,
+      "prompt": "Your friends want to hang out.",
+      "options": [
+        { "id": "hang_out", "label": "Go hang out", "icon": "🧑‍🤝‍🧑" },
+        { "id": "stay_home", "label": "Stay home and rest", "icon": "🏠" }
+      ]
+    },
+    {
+      "step": 6,
+      "prompt": "End of the school week. How do you feel?",
+      "options": [
+        { "id": "prepared", "label": "Prepared for next week", "icon": "😊" },
+        { "id": "overwhelmed", "label": "A bit overwhelmed", "icon": "😬" }
+      ]
+    }
+  ]
+}
