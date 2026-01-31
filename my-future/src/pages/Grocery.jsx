@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../Grocery.css';
 import '../index.css';
+import PlayerProfile from './PlayerProfile';
 
 const Grocery = () => {
   return (
     <div className="page-wrapper">
       {/* Player Stats Sidebar */}
       <div className="player-sidebar">
-        <div className="player-emoji">👤</div>
+        <div className="player-emoji"><PlayerProfile size="150px" /></div>
         
         <div className="stat-bar">
           <div className="stat-label">Health</div>
@@ -30,6 +31,11 @@ const Grocery = () => {
             <div className="stat-bar-fill" style={{ width: '85%' }}></div>
           </div>
         </div>
+        <img 
+          src="../../images/futuremelogo.png" 
+          alt="Future Me Logo" 
+          className="sidebar-logo" 
+        />
       </div>
 
       {/* Main Content Area */}

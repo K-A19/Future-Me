@@ -6,7 +6,8 @@
 
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #87CEEB;
+  /* Updated Background */
+  background-color: #cc6d5e; 
   width: 100vw;
   height: 100vh;
 }
@@ -27,13 +28,15 @@ body {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(255, 255, 255, 0.95);
+  /* Updated to soft cream */
+  background-color: rgba(255, 249, 245, 0.95);
   padding: 15px 40px;
   border-radius: 30px;
   font-size: 28px;
   font-weight: bold;
-  color: #2c3e50;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  /* Updated to terracotta text */
+  color: #cc6d5e;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   z-index: 1000;
   white-space: nowrap;
 }
@@ -56,27 +59,43 @@ body {
 
 /* Player stats sidebar */
 .player-sidebar {
-  width: 200px;
-  height: 100%;
-  background-color: rgba(50, 50, 50, 0.8);
-  padding: 20px;
+  width: 240px;
+  height: 150%;
+  /* Updated to semi-transparent cream */
+  background-color: rgba(255, 249, 245, 0.8);
+  padding: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  border-left: 3px solid #FFD700;
+  /* Updated border color */
+  border-left: 3px solid #a15447;
   flex-shrink: 0;
+}
+
+.sidebar-logo {
+  /* This magic line pushes the logo to the bottom of the flex container */
+  margin-top: 240px; 
+  
+  width: 140%;
+  max-width: 600px;
+  height : auto; /* Adjust size to fit your sidebar width */
+  align-self: center; /* Centers it horizontally */
+  padding-top: 20px; /* Gives it some breathing room from the last stat bar */
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
 .player-emoji {
   width: 100%;
-  height: 120px;
-  background-color: rgba(200, 200, 200, 0.6);
-  border: 2px solid #FFD700;
+  height: 160px;
+  /* Updated to soft clay */
+  background-color: #ecd5d0;
+  border: 2px solid #cc6d5e;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 80px;
+  padding-top: 10px;
 }
 
 .stat-bar {
@@ -84,7 +103,8 @@ body {
 }
 
 .stat-label {
-  color: white;
+  /* Updated to dark brown */
+  color: #3d231f;
   font-size: 12px;
   margin-bottom: 5px;
   font-weight: bold;
@@ -93,15 +113,17 @@ body {
 .stat-bar-bg {
   width: 100%;
   height: 20px;
-  background-color: rgba(100, 100, 100, 0.7);
-  border: 2px solid #FFD700;
+  /* Updated background bar */
+  background-color: #e5ccca;
+  border: 2px solid #cc6d5e;
   border-radius: 5px;
   overflow: hidden;
 }
 
 .stat-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #FFD700, #FFA500);
+  /* Updated gradient to terracotta/peach */
+  background: linear-gradient(90deg, #cc6d5e, #e89b8e);
   width: 70%;
 }
 
@@ -124,7 +146,8 @@ body {
   position: absolute;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 3px solid #FFD700;
+  /* Updated border to white-cream */
+  border: 3px solid #fff9f5;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
   text-decoration: none;
@@ -138,55 +161,30 @@ body {
 
 .clickable-area:hover {
   background-color: rgba(255, 255, 255, 0.4);
-  border-color: #FFD700;
+  /* Updated border-color on hover */
+  border-color: #fff;
   transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .clickable-area:active {
   transform: scale(0.98);
 }
 
-/* Position buttons based on the map layout */
-.school-btn {
-  top: 15%;
-  left: 10%;
-  width: 18%;
-  height: 40%;
-  position: absolute;
-}
-
-.home-btn {
-  bottom: 18%;
-  left: 5%;
-  width: 16%;
-  height: 28%;
-  position: absolute;
-}
-
-.grocery-btn {
-  top: 14%;
-  right: 22%;
-  width: 20%;
-  height: 32%;
-  position: absolute;
-}
-
-.office-btn {
-  bottom: 14%;
-  right: 10%;
-  width: 20%;
-  height: 32%;
-  position: absolute;
-}
+/* Building positions kept the same */
+.school-btn { top: 15%; left: 10%; width: 18%; height: 40%; position: absolute; }
+.home-btn { bottom: 18%; left: 5%; width: 16%; height: 28%; position: absolute; }
+.grocery-btn { top: 14%; right: 22%; width: 20%; height: 32%; position: absolute; }
+.office-btn { bottom: 14%; right: 10%; width: 20%; height: 32%; position: absolute; }
 
 .location-label {
   position: absolute;
   bottom: -40px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba(255, 215, 0, 0.95);
-  color: #333;
+  /* Updated label colors */
+  background-color: #cc6d5e;
+  color: #fff9f5;
   padding: 8px 15px;
   border-radius: 20px;
   font-weight: bold;
@@ -204,64 +202,23 @@ body {
 
 /* Tablet and below */
 @media (max-width: 1024px) {
-  .title {
-    font-size: 24px;
-    padding: 12px 30px;
-  }
-  
-  .map-wrapper {
-    width: 95%;
-  }
-  
-  .location-label {
-    font-size: 12px;
-    padding: 6px 12px;
-    bottom: -35px;
-  }
+  .title { font-size: 24px; padding: 12px 30px; }
+  .map-wrapper { width: 95%; }
+  .location-label { font-size: 12px; padding: 6px 12px; bottom: -35px; }
 }
 
 /* Mobile */
 @media (max-width: 768px) {
-  .game-container {
-    padding: 70px 10px 10px;
-  }
-
-  .title {
-    font-size: 18px;
-    padding: 10px 20px;
-    top: 10px;
-  }
-  
-  .map-wrapper {
-    width: 100%;
-  }
-  
-  .map-image {
-    border: 4px solid #8B6914;
-  }
-  
-  /* Make buttons slightly larger on mobile for easier clicking */
-  .clickable-area {
-    border: 2px solid rgba(255, 215, 0, 0.5);
-  }
-  
-  .location-label {
-    font-size: 11px;
-    padding: 5px 10px;
-    bottom: -30px;
-  }
+  .game-container { padding: 70px 10px 10px; }
+  .title { font-size: 18px; padding: 10px 20px; top: 10px; }
+  .map-wrapper { width: 100%; }
+  .map-image { border: 4px solid #a15447; }
+  .clickable-area { border: 2px solid rgba(255, 255, 255, 0.5); }
+  .location-label { font-size: 11px; padding: 5px 10px; bottom: -30px; }
 }
 
 /* Small mobile */
 @media (max-width: 480px) {
-  .title {
-    font-size: 14px;
-    padding: 8px 15px;
-  }
-  
-  .location-label {
-    font-size: 10px;
-    padding: 4px 8px;
-    bottom: -25px;
-  }
+  .title { font-size: 14px; padding: 8px 15px; }
+  .location-label { font-size: 10px; padding: 4px 8px; bottom: -25px; }
 }
