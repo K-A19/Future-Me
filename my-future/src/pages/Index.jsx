@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Index.css';
+import '../Index.css';
 
 const Index = () => {
   const handleLocationClick = (location) => {
@@ -8,6 +8,7 @@ const Index = () => {
   };
 
   return (
+    <>
     <div className="game-container">
       <h1 className="title">🏘️ Welcome to My Town 🏘️</h1>
       
@@ -54,6 +55,7 @@ const Index = () => {
         <span className="location-label">🏢 Office</span>
       </Link>
     </div>
+    </>
   );
 };
 

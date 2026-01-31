@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Index from './Index';
-import Home from './Home';
-import Grocery from './Grocery';
-import Office from './Office';
-import School from './School';
+import Index from './pages/Index';
+import Home from './pages/Home';
+import Grocery from './pages/Grocery';
+import Office from './pages/Office';
+import School from './pages/School';
 
 function App() {
   return (

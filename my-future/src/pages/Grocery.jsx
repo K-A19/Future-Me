@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Grocery.css';
+import '../Grocery.css';
 
 const Grocery = () => {
   return (

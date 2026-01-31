@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './School.css';
+import '../School.css';
 
 const School = () => {
   return (
+    <>
     <div className="school-page">
       <Link to="/" className="back-button">← Back to Town</Link>
 
@@ -37,6 +38,7 @@ const School = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
