@@ -66,13 +66,6 @@ const Home = () => {
           </div>
           <div className="stat-value">Lvl {getMoneySkillsLevel(stats.moneySkills).level}</div>
         </div>
-      
-
-        <img 
-          src="../../images/futuremelogo.png" 
-          alt="Future Me Logo" 
-          className="sidebar-logo" 
-        />
       </div>
 
       {/* Main Content Area */}
