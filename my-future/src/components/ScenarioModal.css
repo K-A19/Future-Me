@@ -271,7 +271,7 @@
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  animation: pulse 0.6s ease;
+  animation: pulse 0.6s ease, popShake 0.5s ease;
 }
 
 @keyframes pulse {
@@ -286,6 +286,65 @@
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+/* Pop and shake effect for dramatic impact */
+@keyframes popShake {
+  0% {
+    transform: scale(1) translateX(0);
+  }
+  25% {
+    transform: scale(1.05) translateX(-3px);
+  }
+  50% {
+    transform: scale(1.1) translateX(3px);
+  }
+  75% {
+    transform: scale(1.05) translateX(-2px);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+  }
+}
+
+/* Animate stat changes with floating feedback */
+.stat-change {
+  animation: slideInStat 0.4s ease-out;
+}
+
+.stat-change.positive {
+  animation: slideInStat 0.4s ease-out, floatPositive 0.8s ease-out 0.3s forwards;
+}
+
+.stat-change.negative {
+  animation: slideInStat 0.4s ease-out, floatNegative 0.8s ease-out 0.3s forwards;
+}
+
+@keyframes slideInStat {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floatPositive {
+  to {
+    opacity: 1;
+    color: #4CAF50;
+    text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+  }
+}
+
+@keyframes floatNegative {
+  to {
+    opacity: 1;
+    color: #F44336;
+    text-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
   }
 }
 

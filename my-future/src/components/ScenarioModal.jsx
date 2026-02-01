@@ -25,19 +25,23 @@ const ScenarioModal = ({
   }, [step]);
 
   const handleChoiceClick = (choiceId) => {
-    // Make the choice and get updated stats
-    const oldStats = stats;
+    // Make the choice and get updated stats (with scaled deltas)
+    const oldStats = { ...stats };
     const newStats = makeChoice(choiceId);
 
-    // Calculate changes
-    const changes = {
+    // Use the scaled deltas from the choice system if available
+    const changes = newStats._deltas || {
       savings: newStats.savings - oldStats.savings,
-      happiness: newStats.happiness - oldStats.happiness,
-      moneySmarts: newStats.moneySmarts - oldStats.moneySmarts,
+      lifeBalance: newStats.lifeBalance - oldStats.lifeBalance,
+      moneySkills: newStats.moneySkills - oldStats.moneySkills,
     };
 
+    // Remove the private _deltas field before storing stats
+    const cleanedStats = { ...newStats };
+    delete cleanedStats._deltas;
+
     setSelectedChoice(choiceId);
-    setFeedbackStats({ newStats, changes });
+    setFeedbackStats({ newStats: cleanedStats, changes });
     setShowFeedback(true);
 
     // Call the callback after a brief delay to show feedback
@@ -95,11 +99,11 @@ const ScenarioModal = ({
               </div>
               <div className="stat-item">
                 <span className="stat-emoji">😊</span>
-                <span className="stat-text">{stats.happiness}</span>
+                <span className="stat-text">{stats.lifeBalance}</span>
               </div>
               <div className="stat-item">
                 <span className="stat-emoji">🧠</span>
-                <span className="stat-text">{stats.moneySmarts}</span>
+                <span className="stat-text">{stats.moneySkills}</span>
               </div>
             </div>
           </>
@@ -118,16 +122,16 @@ const ScenarioModal = ({
                   Savings: {feedbackStats.changes.savings > 0 ? '+' : ''}{feedbackStats.changes.savings}
                 </span>
               </div>
-              <div className={`stat-change ${feedbackStats.changes.happiness > 0 ? 'positive' : feedbackStats.changes.happiness < 0 ? 'negative' : 'neutral'}`}>
+              <div className={`stat-change ${feedbackStats.changes.lifeBalance > 0 ? 'positive' : feedbackStats.changes.lifeBalance < 0 ? 'negative' : 'neutral'}`}>
                 <span className="emoji">😊</span>
                 <span className="change-text">
-                  Happiness: {feedbackStats.changes.happiness > 0 ? '+' : ''}{feedbackStats.changes.happiness}
+                  Balance: {feedbackStats.changes.lifeBalance > 0 ? '+' : ''}{feedbackStats.changes.lifeBalance}
                 </span>
               </div>
-              <div className={`stat-change ${feedbackStats.changes.moneySmarts > 0 ? 'positive' : feedbackStats.changes.moneySmarts < 0 ? 'negative' : 'neutral'}`}>
+              <div className={`stat-change ${feedbackStats.changes.moneySkills > 0 ? 'positive' : feedbackStats.changes.moneySkills < 0 ? 'negative' : 'neutral'}`}>
                 <span className="emoji">🧠</span>
                 <span className="change-text">
-                  Smarts: {feedbackStats.changes.moneySmarts > 0 ? '+' : ''}{feedbackStats.changes.moneySmarts}
+                  Skills: {feedbackStats.changes.moneySkills > 0 ? '+' : ''}{feedbackStats.changes.moneySkills}
                 </span>
               </div>
             </div>

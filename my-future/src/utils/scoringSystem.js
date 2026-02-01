@@ -1,167 +1,210 @@
 /**
  * Financial Literacy Game Scoring System
  * 
- * Teaching kids that financial literacy = responsibility + happiness
+ * Teaching kids that financial literacy = responsibility + life balance
  * Rewards balanced choices, teaches consequences of extremes
+ * 
+ * IMPACT SCALING:
+ * Each choice has an impact level that multiplies stat deltas:
+ * - "small" (1.0x): Minor decisions, everyday choices
+ * - "medium" (1.8x): Meaningful decisions with clear tradeoffs
+ * - "big" (2.5x): Major decisions with big consequences
  */
 
 export const INITIAL_STATS = {
-  savings: 100,      // Money saved for future goals ($0-200)
-  happiness: 100,    // Well-being and life satisfaction (0-200)
-  moneySmarts: 0     // Financial knowledge gained (0-200)
+  savings: 100,         // Real dollars ($0-$200)
+  lifeBalance: 100,     // Life satisfaction (0-200, shown as Low/Okay/Good/Great)
+  moneySkills: 0        // Financial knowledge (0-200, shown as Level 1-5)
 };
 
 /**
- * Choice scoring map - each choice ID maps to stat changes
+ * Convert raw stat value to kid-friendly label
+ * @param {number} value - Raw stat value (0-200)
+ * @returns {string} Human-readable label
+ */
+export function getLifeBalanceLabel(value) {
+  if (value < 40) return 'Low';
+  if (value < 80) return 'Okay';
+  if (value < 140) return 'Good';
+  return 'Great';
+}
+
+/**
+ * Convert Money Skills value to level + title
+ * @param {number} value - Raw stat value (0-200)
+ * @returns {Object} { level: 1-5, title: "Learner"|"Growing"|"Smart"|"Expert"|"Genius" }
+ */
+export function getMoneySkillsLevel(value) {
+  if (value < 40) return { level: 1, title: 'Learner' };
+  if (value < 80) return { level: 2, title: 'Growing' };
+  if (value < 130) return { level: 3, title: 'Smart' };
+  if (value < 170) return { level: 4, title: 'Expert' };
+  return { level: 5, title: 'Genius' };
+}
+
+/**
+ * Get progress percentage for stat bars (0-100)
+ * @param {number} value - Raw stat value (0-200)
+ * @returns {number} Progress percentage (0-100)
+ */
+export function getProgressPercent(value) {
+  return Math.round((value / 200) * 100);
+}
+
+/**
+ * Impact scaling multipliers - make stat changes feel dramatic
+ */
+const IMPACT_MULTIPLIERS = {
+  small: 1.0,    // -5 to +8
+  medium: 1.8,   // -15 to +22
+  big: 2.5       // -30 to +40
+};
+
+/**
+ * Apply impact scaling to choice deltas
+ * @param {Object} baseDeltas - { savings, lifeBalance, moneySkills }
+ * @param {string} impact - "small" | "medium" | "big"
+ * @returns {Object} Scaled deltas
+ */
+export function applyImpactScaling(baseDeltas, impact) {
+  const multiplier = IMPACT_MULTIPLIERS[impact] || 1.0;
+  return {
+    savings: Math.round(baseDeltas.savings * multiplier),
+    lifeBalance: Math.round(baseDeltas.lifeBalance * multiplier),
+    moneySkills: Math.round(baseDeltas.moneySkills * multiplier)
+  };
+}
+
+/**
+ * Choice scoring map - each choice has impact level + base deltas
  * Designed to teach:
- * - Balance is key (both savings AND happiness needed)
+ * - Balance is key (both savings AND life balance needed)
  * - Smart choices improve all 3 stats
  * - Extreme choices have trade-offs
- * - Small smart choices add up
+ * - Small smart choices add up (impact scaling)
  */
 export const choiceScoring = {
   // ===== HOME SCENARIO =====
-  // Step 1: Order delivery vs make at home
-  delivery: { savings: -15, happiness: 8, moneySmarts: 2 },      // Impulse, but happy short term
-  cook: { savings: 5, happiness: 5, moneySmarts: 8 },             // Smart balanced choice
-
-  // Step 2: Buy snack vs use what's at home
-  buy_snack: { savings: -8, happiness: 7, moneySmarts: 3 },      // Impulse treat
-  home_snack: { savings: 3, happiness: 4, moneySmarts: 6 },      // Responsible choice
-
-  // Step 3: Clean now vs do it later
-  clean_now: { savings: 0, happiness: 3, moneySmarts: 5 },       // Responsible, feels good
-  later: { savings: 0, happiness: -2, moneySmarts: 0 },          // Procrastination, stress
-
-  // Step 4: Buy online thing now vs wait 24 hours
-  buy_now: { savings: -20, happiness: 6, moneySmarts: -2 },      // Impulse, instant gratification
-  wait_24: { savings: 8, happiness: 4, moneySmarts: 10 },        // Smart financial thinking!
-
-  // Step 5: Buy new game vs play free game
-  new_game: { savings: -25, happiness: 10, moneySmarts: 1 },     // Expensive fun
-  use_free: { savings: 5, happiness: 6, moneySmarts: 5 },        // Resourceful fun
-
-  // Step 6: Leave things on vs turn off
-  leave_on: { savings: -5, happiness: 0, moneySmarts: -2 },      // Wasteful
-  turn_off: { savings: 8, happiness: 2, moneySmarts: 5 },        // Mindful budgeting
-
-  // Step 7: Buy new outfit vs reuse/swap
-  brand_new: { savings: -30, happiness: 12, moneySmarts: 2 },    // Big spend, feels good
-  swap_reuse: { savings: 10, happiness: 6, moneySmarts: 8 },     // Creative & smart
-
-  // Step 8: Save some vs spend some
-  save_some: { savings: 20, happiness: 5, moneySmarts: 12 },     // BALANCED CHOICE - teaches that saving can still be happy
-  spend_some: { savings: -5, happiness: 15, moneySmarts: 3 },    // Short-term happiness
-
-  // Step 9: Start trial vs skip
-  start_trial: { savings: -10, happiness: 5, moneySmarts: 0 },   // Hidden cost awareness gap
-  skip_trial: { savings: 5, happiness: 3, moneySmarts: 8 },      // Financial wisdom
-
-  // Step 10: Proud vs learned
-  proud: { savings: 0, happiness: 10, moneySmarts: 5 },          // Reflection on choices
-  learned: { savings: 5, happiness: 8, moneySmarts: 15 },        // Growth mindset!
+  delivery: { impact: 'medium', savings: -8, lifeBalance: 4, moneySkills: 1 },      // Impulse, but happy short term
+  cook: { impact: 'medium', savings: 3, lifeBalance: 3, moneySkills: 4 },             // Smart balanced choice
+  buy_snack: { impact: 'small', savings: -4, lifeBalance: 4, moneySkills: 2 },      // Impulse treat
+  home_snack: { impact: 'small', savings: 2, lifeBalance: 2, moneySkills: 3 },      // Responsible choice
+  clean_now: { impact: 'small', savings: 0, lifeBalance: 2, moneySkills: 3 },       // Responsible, feels good
+  later: { impact: 'small', savings: 0, lifeBalance: -1, moneySkills: 0 },          // Procrastination, stress
+  buy_now: { impact: 'big', savings: -12, lifeBalance: 4, moneySkills: -2 },      // Impulse, instant gratification
+  wait_24: { impact: 'medium', savings: 5, lifeBalance: 2, moneySkills: 6 },        // Smart financial thinking!
+  new_game: { impact: 'big', savings: -14, lifeBalance: 6, moneySkills: 1 },     // Expensive fun
+  use_free: { impact: 'medium', savings: 3, lifeBalance: 3, moneySkills: 3 },        // Resourceful fun
+  leave_on: { impact: 'small', savings: -3, lifeBalance: 0, moneySkills: -1 },      // Wasteful
+  turn_off: { impact: 'medium', savings: 5, lifeBalance: 1, moneySkills: 3 },        // Mindful budgeting
+  brand_new: { impact: 'big', savings: -18, lifeBalance: 7, moneySkills: 1 },    // Big spend, feels good
+  swap_reuse: { impact: 'medium', savings: 6, lifeBalance: 3, moneySkills: 4 },     // Creative & smart
+  save_some: { impact: 'medium', savings: 12, lifeBalance: 3, moneySkills: 7 },     // BALANCED CHOICE - teaches that saving can still be happy
+  spend_some: { impact: 'medium', savings: -3, lifeBalance: 8, moneySkills: 2 },    // Short-term happiness
+  start_trial: { impact: 'medium', savings: -6, lifeBalance: 3, moneySkills: 0 },   // Hidden cost awareness gap
+  skip_trial: { impact: 'small', savings: 3, lifeBalance: 2, moneySkills: 4 },      // Financial wisdom
+  proud: { impact: 'small', savings: 0, lifeBalance: 6, moneySkills: 3 },          // Reflection on choices
+  learned: { impact: 'medium', savings: 3, lifeBalance: 4, moneySkills: 8 },        // Growth mindset!
+  // Home scenario step 9 (budget check)
+  check_budget: { impact: 'medium', savings: 7, lifeBalance: 3, moneySkills: 6 },  // Smart planning
+  just_go: { impact: 'big', savings: -5, lifeBalance: 6, moneySkills: 1 },       // Impulsive, no planning
 
   // ===== GROCERIES SCENARIO =====
-  // Step 1: Snacks first vs produce first
-  snacks: { savings: -12, happiness: 8, moneySmarts: 0 },        // Impulse shopping
-  produce: { savings: 8, happiness: 4, moneySmarts: 7 },         // Planning-focused
-
-  // Step 2: Soda vs water
-  soda: { savings: -8, happiness: 6, moneySmarts: 2 },           // Expensive indulgence
-  water: { savings: 10, happiness: 2, moneySmarts: 8 },          // Smart health choice
-
-  // Step 3: Instant noodles vs simple home meal
-  instant: { savings: -3, happiness: 3, moneySmarts: 1 },        // Cheap but low nutrition
-  cook: { savings: 5, happiness: 8, moneySmarts: 9 },            // Balanced home meal
-
-  // Step 4: Bulk vs treat
-  bulk: { savings: 15, happiness: 4, moneySmarts: 10 },          // Long-term thinking!
-  treat: { savings: -10, happiness: 10, moneySmarts: 2 },        // Impulse on sale
-
-  // Step 5: Stick to plan vs add extra
-  budget: { savings: 12, happiness: 6, moneySmarts: 10 },        // Discipline & planning
-  extra: { savings: -20, happiness: 8, moneySmarts: -2 },        // Chaos shopping
-
-  // Step 6: Store brand vs name brand
-  store_brand: { savings: 10, happiness: 4, moneySmarts: 8 },    // Smart value choice
-  name_brand: { savings: -12, happiness: 6, moneySmarts: 1 },    // Brand bias
+  follow_list: { impact: 'medium', savings: 7, lifeBalance: 3, moneySkills: 6 },   // Disciplined shopping
+  browse: { impact: 'medium', savings: -6, lifeBalance: 5, moneySkills: 0 },        // Impulse shopping
+  produce: { impact: 'small', savings: 5, lifeBalance: 2, moneySkills: 4 },         // Planning-focused
+  snacks: { impact: 'medium', savings: -7, lifeBalance: 5, moneySkills: 0 },        // Impulse shopping
+  store_brand: { impact: 'medium', savings: 6, lifeBalance: 2, moneySkills: 5 },    // Smart value choice
+  name_brand: { impact: 'medium', savings: -7, lifeBalance: 3, moneySkills: 1 },    // Brand bias
+  make_own: { impact: 'medium', savings: 5, lifeBalance: 4, moneySkills: 5 },        // Smart cooking
+  pre_made: { impact: 'small', savings: -2, lifeBalance: 3, moneySkills: 1 },       // Convenience cost
+  buy_bulk: { impact: 'big', savings: 10, lifeBalance: 2, moneySkills: 6 },      // Long-term thinking!
+  buy_one: { impact: 'small', savings: 2, lifeBalance: 3, moneySkills: 3 },         // Balanced choice
+  skip_impulse: { impact: 'medium', savings: 5, lifeBalance: 2, moneySkills: 5 },    // Discipline
+  buy_candy: { impact: 'small', savings: -2, lifeBalance: 4, moneySkills: 0 },      // Impulse checkout
+  wish_saved: { impact: 'small', savings: 0, lifeBalance: 3, moneySkills: 4 },      // Learning moment
 
   // ===== SCHOOL SCENARIO =====
-  // Step 1: Pack lunch vs buy lunch
-  pack_lunch: { savings: 15, happiness: 6, moneySmarts: 10 },    // Planning wins!
-  buy_lunch: { savings: -10, happiness: 7, moneySmarts: 1 },     // Convenient but expensive
-
-  // Step 2: Bring supplies vs forget
-  bring_supplies: { savings: 8, happiness: 8, moneySmarts: 10 }, // Prepared & stress-free
-  forget_supplies: { savings: -10, happiness: -3, moneySmarts: 0 }, // Stressful & costly (buying again)
-
-  // Step 3: Homework vs games
-  do_homework: { savings: 5, happiness: 4, moneySmarts: 8 },     // Long-term investment
-  play_games: { savings: 0, happiness: 10, moneySmarts: 1 },     // Fun but short-term
-
-  // Step 4: Buy item now vs wait
-  buy_item: { savings: -15, happiness: 7, moneySmarts: 2 },      // Impulse
-  wait: { savings: 5, happiness: 5, moneySmarts: 10 },           // Thoughtful choice
-
-  // Step 5: Hang out vs stay home
-  hang_out: { savings: -15, happiness: 12, moneySmarts: 3 },     // Social but expensive
-  stay_home: { savings: 8, happiness: 6, moneySmarts: 4 },       // Self-care & savings
-
-  // Step 6: Prepared vs overwhelmed
-  prepared: { savings: 0, happiness: 12, moneySmarts: 10 },      // Confidence from planning
-  overwhelmed: { savings: -5, happiness: -2, moneySmarts: 0 },   // Consequence of poor choices
+  pack_lunch: { impact: 'big', savings: 10, lifeBalance: 4, moneySkills: 6 },    // Planning wins!
+  buy_lunch: { impact: 'medium', savings: -6, lifeBalance: 4, moneySkills: 1 },     // Convenient but expensive
+  borrow_free: { impact: 'medium', savings: 3, lifeBalance: 3, moneySkills: 4 },     // Smart & social
+  buy_pencil: { impact: 'small', savings: -1, lifeBalance: 2, moneySkills: 1 },     // Expensive shortcut
+  bring_supplies: { impact: 'medium', savings: 5, lifeBalance: 5, moneySkills: 6 }, // Prepared & stress-free
+  forget_supplies: { impact: 'big', savings: -7, lifeBalance: -2, moneySkills: 0 }, // Stressful & costly
+  compare_value: { impact: 'medium', savings: 3, lifeBalance: 5, moneySkills: 6 },  // Smart shopping
+  buy_first: { impact: 'medium', savings: -2, lifeBalance: 6, moneySkills: 1 },     // Impulse buying
+  save_plan: { impact: 'big', savings: 9, lifeBalance: 5, moneySkills: 7 },     // Goal-oriented
+  ask_money: { impact: 'medium', savings: -6, lifeBalance: 5, moneySkills: 1 },     // Last-minute scramble
+  think_value: { impact: 'medium', savings: 5, lifeBalance: 3, moneySkills: 6 },    // Thoughtful choice
+  buy_both: { impact: 'big', savings: -12, lifeBalance: 7, moneySkills: 1 },     // Spending spree
+  keep_saving: { impact: 'big', savings: 10, lifeBalance: 5, moneySkills: 7 },   // Momentum building
+  do_homework: { impact: 'medium', savings: 3, lifeBalance: 2, moneySkills: 5 },     // Long-term investment
+  play_games: { impact: 'small', savings: 0, lifeBalance: 6, moneySkills: 1 },     // Fun but short-term
 
   // ===== WORK SCENARIO =====
-  // Step 1: Spend vs save first thought
-  spend: { savings: -25, happiness: 12, moneySmarts: -5 },       // Immediate gratification
-  save: { savings: 30, happiness: 6, moneySmarts: 15 },          // Instant wisdom! Core financial literacy
-
-  // Step 2: Go out vs stay in
-  go_out: { savings: -20, happiness: 14, moneySmarts: 2 },       // Fun but expensive
-  stay_in: { savings: 10, happiness: 8, moneySmarts: 5 },        // Balanced choice
-
-  // Step 3: Buy online vs wait
-  buy: { savings: -30, happiness: 10, moneySmarts: -2 },         // Major impulse
-  wait: { savings: 15, happiness: 5, moneySmarts: 12 },          // Discipline & wisdom
-
-  // Step 4: Save for goal vs forget
-  goal: { savings: 25, happiness: 8, moneySmarts: 15 },          // PURPOSE-DRIVEN SAVING - teaches goals matter!
-  forget: { savings: -10, happiness: 12, moneySmarts: 0 },       // Drifting spending
-
-  // Step 5: Save some vs spend all (second payment)
-  split: { savings: 20, happiness: 10, moneySmarts: 12 },        // PERFECT BALANCE CHOICE
-  spend_all: { savings: -20, happiness: 14, moneySmarts: -3 },   // Back to zero
-
-  // Step 6: Feel proud vs regret
-  reflect: { savings: 0, happiness: 15, moneySmarts: 10 },       // Pride in balanced choices
-  regret: { savings: -10, happiness: -5, moneySmarts: 3 }        // Learning from mistakes
+  budget_it: { impact: 'big', savings: 10, lifeBalance: 5, moneySkills: 9 },     // Smart planning
+  no_plan: { impact: 'big', savings: -6, lifeBalance: 6, moneySkills: 1 },       // Chaotic spending
+  spend: { impact: 'big', savings: -15, lifeBalance: 7, moneySkills: -3 },       // Immediate gratification
+  save: { impact: 'big', savings: 18, lifeBalance: 4, moneySkills: 9 },          // Instant wisdom! Core financial literacy
+  go_out: { impact: 'medium', savings: -12, lifeBalance: 8, moneySkills: 1 },       // Fun but expensive
+  stay_in: { impact: 'medium', savings: 6, lifeBalance: 5, moneySkills: 3 },        // Balanced choice
+  stick_budget: { impact: 'big', savings: 8, lifeBalance: 7, moneySkills: 6 }, // Sticking to plan
+  break_budget: { impact: 'big', savings: -10, lifeBalance: 10, moneySkills: 0 }, // Breaking discipline
+  buy: { impact: 'big', savings: -18, lifeBalance: 6, moneySkills: -1 },         // Major impulse
+  wait: { impact: 'big', savings: 10, lifeBalance: 3, moneySkills: 7 },          // Discipline & wisdom
+  save_goal: { impact: 'big', savings: 12, lifeBalance: 6, moneySkills: 9 },    // Goal-focused saving
+  buy_now: { impact: 'big', savings: -15, lifeBalance: 7, moneySkills: -2 },     // Impulsive purchase
+  goal: { impact: 'big', savings: 16, lifeBalance: 5, moneySkills: 9 },          // PURPOSE-DRIVEN SAVING
+  forget: { impact: 'big', savings: -6, lifeBalance: 7, moneySkills: 0 },       // Drifting spending
+  keep_saving: { impact: 'big', savings: 12, lifeBalance: 6, moneySkills: 7 },  // PERFECT BALANCE CHOICE
+  spend_savings: { impact: 'big', savings: -10, lifeBalance: 8, moneySkills: 1 }, // Derailing goals
+  split: { impact: 'big', savings: 12, lifeBalance: 6, moneySkills: 7 },        // PERFECT BALANCE CHOICE
+  spend_all: { impact: 'big', savings: -12, lifeBalance: 8, moneySkills: -2 },   // Back to zero
+  add_savings: { impact: 'big', savings: 15, lifeBalance: 5, moneySkills: 9 },   // Goal achievement
+  treat_yourself: { impact: 'small', savings: -3, lifeBalance: 7, moneySkills: 1 }, // Balanced indulgence
+  hit_goal: { impact: 'big', savings: 8, lifeBalance: 9, moneySkills: 11 },     // Success! Teaching that goals work
+  fell_short: { impact: 'medium', savings: 2, lifeBalance: 3, moneySkills: 6 },     // Learning moment
+  reflect: { impact: 'medium', savings: 0, lifeBalance: 9, moneySkills: 6 },       // Pride in balanced choices
+  regret: { impact: 'medium', savings: -6, lifeBalance: -3, moneySkills: 2 }        // Learning from mistakes
 };
 
 /**
  * Apply choice score and enforce stat constraints
  * @param {Object} currentStats - Current stat values
  * @param {string} choiceId - ID of chosen option
- * @returns {Object} Updated stats with constraints applied
+ * @returns {Object} Updated stats with constraints applied (and delta info)
  */
 export function applyChoiceScore(currentStats, choiceId) {
-  const scoreChange = choiceScoring[choiceId];
+  const choice = choiceScoring[choiceId];
   
-  if (!scoreChange) {
+  if (!choice) {
     console.warn(`Unknown choice: ${choiceId}`);
     return currentStats;
   }
 
+  // Extract impact and base deltas
+  const { impact, ...baseDeltas } = choice;
+  
+  // Apply impact scaling
+  const scaledDeltas = applyImpactScaling(baseDeltas, impact);
+
   const newStats = {
-    savings: currentStats.savings + scoreChange.savings,
-    happiness: currentStats.happiness + scoreChange.happiness,
-    moneySmarts: currentStats.moneySmarts + scoreChange.moneySmarts
+    savings: currentStats.savings + scaledDeltas.savings,
+    lifeBalance: currentStats.lifeBalance + scaledDeltas.lifeBalance,
+    moneySkills: currentStats.moneySkills + scaledDeltas.moneySkills
   };
 
   // Apply min/max constraints
-  return {
+  const clampedStats = {
     savings: Math.max(0, Math.min(200, newStats.savings)),
-    happiness: Math.max(0, Math.min(200, newStats.happiness)),
-    moneySmarts: Math.max(0, Math.min(200, newStats.moneySmarts))
+    lifeBalance: Math.max(0, Math.min(200, newStats.lifeBalance)),
+    moneySkills: Math.max(0, Math.min(200, newStats.moneySkills))
+  };
+
+  // Return both updated stats and the deltas for UI feedback
+  return {
+    ...clampedStats,
+    _deltas: scaledDeltas  // Private field for UI to show +18, -12, etc.
   };
 }
 
@@ -172,43 +215,43 @@ export function applyChoiceScore(currentStats, choiceId) {
  * @returns {Object} Result with title, message, and encouragement
  */
 export function calculateEndGameResult(finalStats) {
-  const { savings, happiness, moneySmarts } = finalStats;
+  const { savings, lifeBalance, moneySkills } = finalStats;
   
   // Thresholds for "high" and "low"
   const highSavings = savings >= 120;
   const lowSavings = savings <= 80;
-  const highHappiness = happiness >= 120;
-  const lowHappiness = happiness <= 80;
-  const highMoneySmarts = moneySmarts >= 120;
+  const highLifeBalance = lifeBalance >= 120;
+  const lowLifeBalance = lifeBalance <= 80;
+  const highMoneySkills = moneySkills >= 120;
 
   let title = '';
   let message = '';
   let emoji = '';
   let color = '';
 
-  // ===== IDEAL: Balance (both savings and happiness) =====
-  if (highSavings && highHappiness) {
+  // ===== IDEAL: Balance (both savings and lifeBalance) =====
+  if (highSavings && highLifeBalance) {
     title = '💎 Financial Champion!';
     message = "You found the perfect balance! You're saving for tomorrow AND enjoying today. That's true financial wisdom - you don't have to choose between being responsible and being happy.";
     emoji = '🎉';
     color = '#FFD700';
   }
-  // ===== High Savings, Low Happiness (too extreme) =====
-  else if (highSavings && lowHappiness) {
+  // ===== High Savings, Low Life Balance (too extreme) =====
+  else if (highSavings && lowLifeBalance) {
     title = '💰 The Saver';
     message = 'Great savings! But remember - money is a tool for living a good life. You can save AND enjoy experiences. Next time, treat yourself more often (within reason). Financial literacy means balance!';
     emoji = '🤔';
     color = '#4CAF50';
   }
-  // ===== Low Savings, High Happiness (spending too much) =====
-  else if (lowSavings && highHappiness) {
+  // ===== Low Savings, High Life Balance (spending too much) =====
+  else if (lowSavings && highLifeBalance) {
     title = '🎉 The Enjoyer';
     message = "You're having fun now, and that's great! But future you will need help. Savings are like having a safety net AND superpowers. Next time, try saving some while still treating yourself. You CAN do both!";
     emoji = '😊';
     color = '#FF9800';
   }
   // ===== Low both (poor choices) =====
-  else if (lowSavings && lowHappiness) {
+  else if (lowSavings && lowLifeBalance) {
     title = '🤔 Room to Grow';
     message = "It looks like your choices weren't working for either goal. The good news? Now you know what NOT to do! Try balancing wants and needs next time. Spend smart, save smart, stay happy.";
     emoji = '📈';
@@ -222,10 +265,10 @@ export function calculateEndGameResult(finalStats) {
     color = '#9C27B0';
   }
 
-  // Extra tip if they have high Money Smarts
+  // Extra tip if they have high Money Skills
   let extraTip = '';
-  if (highMoneySmarts) {
-    extraTip = '\n\n🧠 You\'re building real Money Smarts! Keep learning - every choice teaches you something about money.';
+  if (highMoneySkills) {
+    extraTip = '\n\n🧠 You\'re building real Money Skills! Keep learning - every choice teaches you something about money.';
   }
 
   return {
@@ -235,11 +278,11 @@ export function calculateEndGameResult(finalStats) {
     color,
     stats: {
       savings,
-      happiness,
-      moneySmarts,
+      lifeBalance,
+      moneySkills,
       highSavings,
-      highHappiness,
-      highMoneySmarts
+      highLifeBalance,
+      highMoneySkills
     }
   };
 }

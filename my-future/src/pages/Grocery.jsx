@@ -5,6 +5,7 @@ import '../index.css';
 import PlayerProfile from './PlayerProfile';
 import { useGameContext } from '../context/GameContext';
 import ScenarioModal from '../components/ScenarioModal';
+import { getLifeBalanceLabel, getMoneySkillsLevel, getProgressPercent } from '../utils/scoringSystem';
 
 const Grocery = () => {
   const { stats } = useGameContext();
@@ -25,8 +26,8 @@ const Grocery = () => {
 
   // Calculate percentages for stat bars
   const savingsPercent = (stats.savings / 200) * 100;
-  const happinessPercent = (stats.happiness / 200) * 100;
-  const smartsPercent = (stats.moneySmarts / 200) * 100;
+  const lifeBalancePercent = (stats.lifeBalance / 200) * 100;
+  const skillsPercent = (stats.moneySkills / 200) * 100;
 
   const handleChoiceMade = (choiceId) => {
     if (scenario && currentStep < scenario.steps.length - 1) {
@@ -51,19 +52,19 @@ const Grocery = () => {
         </div>
 
         <div className="stat-bar">
-          <div className="stat-label">😊 Happiness</div>
+          <div className="stat-label">😊 Life Balance</div>
           <div className="stat-bar-bg">
-            <div className="stat-bar-fill" style={{ width: `${happinessPercent}%` }}></div>
+            <div className="stat-bar-fill" style={{ width: `${lifeBalancePercent}%` }}></div>
           </div>
-          <div className="stat-value">{stats.happiness}</div>
+          <div className="stat-value">{getLifeBalanceLabel(stats.lifeBalance)}</div>
         </div>
 
         <div className="stat-bar">
-          <div className="stat-label">🧠 Money Smarts</div>
+          <div className="stat-label">🧠 Money Skills</div>
           <div className="stat-bar-bg">
-            <div className="stat-bar-fill" style={{ width: `${smartsPercent}%` }}></div>
+            <div className="stat-bar-fill" style={{ width: `${skillsPercent}%` }}></div>
           </div>
-          <div className="stat-value">{stats.moneySmarts}</div>
+          <div className="stat-value">Lvl {getMoneySkillsLevel(stats.moneySkills).level}</div>
         </div>
         <img 
           src="../../images/futuremelogo.png" 

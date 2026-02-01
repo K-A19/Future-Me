@@ -3,6 +3,7 @@ import { INITIAL_STATS, applyChoiceScore, calculateEndGameResult } from '../util
 
 /**
  * GameContext - Global state for player stats across all scenarios
+ * Stats: savings, lifeBalance, moneySkills
  * Persists stats to localStorage for continuity across sessions
  */
 export const GameContext = createContext();
