@@ -9,8 +9,8 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(2px);
   animation: fadeIn 0.3s ease;
+  clip-path: inset(0 200px 0 0);
 }
 
 @keyframes fadeIn {
