@@ -1,6 +1,6 @@
-# Future Me: Bridging the Empowerment Gap
+# Future Me: Bridging the Financial Empowerment Gap
 
-**Future Me** is an interactive, gamified web experience designed to combat declining financial and life literacy rates. By visualizing the long-term consequences of daily choices through a reactive digital avatar, the application equips users with the agency to master their own futures.
+**Future Me** is an interactive, gamified web experience designed to combat declining financial literacy rates. By visualizing the long-term consequences of daily choices through a reactive digital avatar, the application equips users with the agency to master their own futures.
 
 ---
 
@@ -66,7 +66,7 @@ The application will be available at `http://localhost:3000`.
 
 ---
 
-### 📊 Empowerment Through Literacy
+### Empowerment Through Literacy
 
 By focusing on **Equilibrium**, this project teaches that true empowerment isn't just about maxing out one stats — it's about the ability to maintain a balanced life while building a secure future.
 
