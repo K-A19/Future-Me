@@ -20,3 +20,49 @@
 .player-emoji:hover {
   transform: scale(1.05);
 }
+
+/* Balance Warning - Shows when stats are imbalanced */
+.player-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+}
+
+.balance-warning {
+  width: 100%;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 2px solid;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  line-height: 1.4;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: slideIn 0.4s ease-out;
+}
+
+.warning-emoji {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.warning-text {
+  flex: 1;
+  color: #3d231f;
+  font-weight: 500;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
