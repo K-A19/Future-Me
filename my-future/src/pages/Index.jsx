@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import '../index.css';
 import PlayerProfile from './PlayerProfile';
 import { useGameContext } from '../context/GameContext';
+import { getLifeBalanceLabel, getMoneySkillsLevel, getProgressPercent } from '../utils/scoringSystem';
 
 const Index = () => {
   const { stats } = useGameContext();
+
+  const savingsPercent = (stats.savings / 200) * 100;
+  const lifeBalancePercent = (stats.lifeBalance / 200) * 100;
+  const skillsPercent = (stats.moneySkills / 200) * 100;
 
   const handleLocationClick = (location) => {
     console.log(`Navigating to ${location}...`);
@@ -29,25 +34,25 @@ const Index = () => {
         <div className="stat-bar">
           <div className="stat-label">💰 Savings</div>
           <div className="stat-bar-bg">
-            <div className="stat-bar-fill" style={{ width: `${(stats.savings / 200) * 100}%` }}></div>
+            <div className="stat-bar-fill" style={{ width: `${savingsPercent}%` }}></div>
           </div>
           <div className="stat-value">${stats.savings}</div>
         </div>
 
         <div className="stat-bar">
-          <div className="stat-label">😊 Happiness</div>
+          <div className="stat-label">😊 Life Balance</div>
           <div className="stat-bar-bg">
-            <div className="stat-bar-fill" style={{ width: `${(stats.happiness / 200) * 100}%` }}></div>
+            <div className="stat-bar-fill" style={{ width: `${lifeBalancePercent}%` }}></div>
           </div>
-          <div className="stat-value">{stats.happiness}</div>
+          <div className="stat-value">{getLifeBalanceLabel(stats.lifeBalance)}</div>
         </div>
 
         <div className="stat-bar">
-          <div className="stat-label">🧠 Money Smarts</div>
+          <div className="stat-label">🧠 Money Skills</div>
           <div className="stat-bar-bg">
-            <div className="stat-bar-fill" style={{ width: `${(stats.moneySmarts / 200) * 100}%` }}></div>
+            <div className="stat-bar-fill" style={{ width: `${skillsPercent}%` }}></div>
           </div>
-          <div className="stat-value">{stats.moneySmarts}</div>
+          <div className="stat-value">Lvl {getMoneySkillsLevel(stats.moneySkills).level}</div>
         </div>
         <button className="reset-button" onClick={createNewCharacter}> NEW CHARACTER</button>
         <img

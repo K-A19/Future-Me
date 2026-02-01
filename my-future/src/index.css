@@ -149,6 +149,7 @@ body {
 
 .player-emoji {
   width: 100%;
+  margin-bottom: 10px;
   height: 160px;
   /* Updated to soft clay */
   background-color: #ecd5d0;
