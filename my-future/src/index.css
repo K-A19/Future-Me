@@ -43,6 +43,8 @@ body {
 
 .map-wrapper {
   position: relative;
+  flex: 1;
+  min-width: 0;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
@@ -59,14 +61,18 @@ body {
 
 /* Player stats sidebar */
 .player-sidebar {
-  width: 260px;
-  height: 150%;
+  flex: 0 0 200px;
+  height: 100vh;
   /* Updated to semi-transparent cream */
   background-color: rgba(255, 249, 245, 0.8);
-  padding: 30px;
+  padding: 30px 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
+  border-right: 3px solid #cc6d5e;
+  overflow-y: auto;
+  overflow-x: hidden;
   /* Updated border color */
   flex-shrink: 0;
 }
@@ -88,13 +94,16 @@ body {
   height: 160px;
   /* Updated to soft clay */
   background-color: #ecd5d0;
-  border: 2px solid #cc6d5e;
+  border: 4px solid #cc6d5e;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 80px;
   padding-top: 10px;
+  flex-shrink: 0;
+  min-width: 0;
+  box-shadow: 0 4px 8px rgba(204, 109, 94, 0.3);
 }
 
 .stat-bar {

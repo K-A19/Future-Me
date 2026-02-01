@@ -111,20 +111,9 @@ const PlayerProfile = ({ size = '200px' }) => {
    */
   const getBalanceWarning = () => {
     const { savings, lifeBalance, moneySkills } = stats;
-    const avg = (savings + lifeBalance + moneySkills) / 3;
-    const threshold = 30; // Stat difference threshold to trigger warning
 
-    // High life balance, low savings (living for now, not future)
-    if (lifeBalance > avg + threshold && savings < avg - threshold) {
-      return {
-        emoji: '⚠️',
-        message: "You're having fun! But Future You is worried about money.",
-        color: '#FFB366', // Orange
-      };
-    }
-
-    // High savings, low life balance (working but not enjoying)
-    if (savings > avg + threshold && lifeBalance < avg - threshold) {
+    // High savings (130+), low life balance (< 80)
+    if (savings >= 130 && lifeBalance < 80) {
       return {
         emoji: '⚠️',
         message: "You're saving well, but are you still having fun?",
@@ -132,8 +121,17 @@ const PlayerProfile = ({ size = '200px' }) => {
       };
     }
 
-    // Very high money skills, low life balance (overconfident saver)
-    if (moneySkills > avg + threshold && lifeBalance < avg - threshold) {
+    // High life balance (130+), low savings (< 80)
+    if (lifeBalance >= 130 && savings < 80) {
+      return {
+        emoji: '⚠️',
+        message: "You're having fun! But Future You is worried about money.",
+        color: '#FFB366',
+      };
+    }
+
+    // High money skills (130+), low life balance (< 80)
+    if (moneySkills >= 130 && lifeBalance < 80) {
       return {
         emoji: '💡',
         message: "Smart choices! Remember: money is a tool, not the goal.",
@@ -141,8 +139,8 @@ const PlayerProfile = ({ size = '200px' }) => {
       };
     }
 
-    // Very high life balance, low money skills (enjoying but not learning)
-    if (lifeBalance > avg + threshold && moneySkills < avg - threshold) {
+    // High life balance (130+), low money skills (< 80)
+    if (lifeBalance >= 130 && moneySkills < 80) {
       return {
         emoji: '💡',
         message: "Good vibes! Try learning one money skill this round.",
@@ -150,8 +148,8 @@ const PlayerProfile = ({ size = '200px' }) => {
       };
     }
 
-    // Both savings and life balance low (struggling)
-    if (savings < avg - threshold && lifeBalance < avg - threshold) {
+    // Both savings and life balance low (< 80)
+    if (savings < 80 && lifeBalance < 80) {
       return {
         emoji: '🤝',
         message: "You've got this! Try choosing balanced options.",
@@ -159,8 +157,8 @@ const PlayerProfile = ({ size = '200px' }) => {
       };
     }
 
-    // Perfect or near-perfect balance (celebration!)
-    if (savings > 150 && lifeBalance > 140 && moneySkills > 140) {
+    // Perfect balance (160+, 150+, 150+)
+    if (savings >= 160 && lifeBalance >= 150 && moneySkills >= 150) {
       return {
         emoji: '🎉',
         message: "Perfect balance! You're smart, secure, AND happy.",
@@ -179,12 +177,6 @@ const PlayerProfile = ({ size = '200px' }) => {
         style={{ width: size, height: size }} 
         {...avatarConfig} 
       />
-      {balanceWarning && (
-        <div className="balance-warning" style={{ borderColor: balanceWarning.color }}>
-          <span className="warning-emoji">{balanceWarning.emoji}</span>
-          <span className="warning-text">{balanceWarning.message}</span>
-        </div>
-      )}
     </div>
   );
 };
