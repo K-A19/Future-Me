@@ -1,54 +1,54 @@
 {
   "id": "groceries",
   "title": "FOOD ADVENTURE",
-  "subtitle": "You’re helping your family with food choices this week.",
+  "subtitle": "You have $30 to help buy food for the week.",
   "steps": [
     {
       "step": 1,
-      "prompt": "You enter the store. What do you grab first?",
+      "prompt": "You enter the store with a list. What's your strategy?",
       "options": [
-        { "id": "snacks", "label": "Snacks", "icon": "🍭" },
-        { "id": "produce", "label": "Fruits & veggies", "icon": "🍎" }
+        { "id": "follow_list", "label": "Stick to the list", "icon": "📋" },
+        { "id": "browse", "label": "Just browse around", "icon": "🚶" }
       ]
     },
     {
       "step": 2,
-      "prompt": "You walk down another aisle. What now?",
+      "prompt": "Chips: $4 name brand or $2 store brand. They taste the same.",
       "options": [
-        { "id": "soda", "label": "Soda", "icon": "🥤" },
-        { "id": "water", "label": "Water", "icon": "💧" }
+        { "id": "store_brand", "label": "Store brand - save $2", "icon": "🏷️" },
+        { "id": "name_brand", "label": "Name brand", "icon": "⭐" }
       ]
     },
     {
       "step": 3,
-      "prompt": "Dinner time is coming. What do you pick?",
+      "prompt": "Lunch choice: $6 pre-made meal or $3 in ingredients to make your own?",
       "options": [
-        { "id": "instant", "label": "Instant noodles", "icon": "🍜" },
-        { "id": "cook", "label": "Simple home meal", "icon": "🍚" }
+        { "id": "make_own", "label": "Make my own", "icon": "🥪" },
+        { "id": "pre_made", "label": "Buy pre-made", "icon": "📦" }
       ]
     },
     {
       "step": 4,
-      "prompt": "You see a sale. What do you do?",
+      "prompt": "You see a sale: Buy 2 pasta boxes, get 1 free! You only need 1 box.",
       "options": [
-        { "id": "bulk", "label": "Buy food that lasts", "icon": "🛒" },
-        { "id": "treat", "label": "Buy a treat", "icon": "🍪" }
+        { "id": "buy_bulk", "label": "Get 3 - it saves money", "icon": "🛒" },
+        { "id": "buy_one", "label": "Just get 1 for now", "icon": "1️⃣" }
       ]
     },
     {
       "step": 5,
-      "prompt": "You’re almost done shopping.",
+      "prompt": "Checkout candy is calling you - $3 for a treat.",
       "options": [
-        { "id": "budget", "label": "Stick to the plan", "icon": "📋" },
-        { "id": "extra", "label": "Add extra items", "icon": "➕" }
+        { "id": "skip_impulse", "label": "Skip it, not on the list", "icon": "🚫" },
+        { "id": "buy_candy", "label": "Grab it!", "icon": "🍬" }
       ]
     },
     {
       "step": 6,
-      "prompt": "At checkout. One last choice.",
+      "prompt": "At checkout: you spent $28 of your $30 budget!",
       "options": [
-        { "id": "store_brand", "label": "Choose store brand", "icon": "🏷️" },
-        { "id": "name_brand", "label": "Choose name brand", "icon": "⭐" }
+        { "id": "proud", "label": "Feel proud!", "icon": "😊" },
+        { "id": "wish_saved", "label": "Wish you saved more", "icon": "🤔" }
       ]
     }
   ]

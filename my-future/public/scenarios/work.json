@@ -5,50 +5,50 @@
   "steps": [
     {
       "step": 1,
-      "prompt": "You get paid. What do you think first?",
+      "prompt": "You get paid $40 for helping a neighbor. What's your plan?",
       "options": [
-        { "id": "spend", "label": "Spend it", "icon": "🎮" },
-        { "id": "save", "label": "Save it", "icon": "💰" }
+        { "id": "budget_it", "label": "Make a plan for it", "icon": "📊" },
+        { "id": "no_plan", "label": "Just see what happens", "icon": "🤷" }
       ]
     },
     {
       "step": 2,
-      "prompt": "A friend wants to hang out.",
+      "prompt": "Your budget says save $20, spend $20. A friend wants to see a movie ($15).",
       "options": [
-        { "id": "go_out", "label": "Go out", "icon": "🍕" },
-        { "id": "stay_in", "label": "Stay in", "icon": "🏠" }
+        { "id": "stick_budget", "label": "Go, it fits the budget", "icon": "🎬" },
+        { "id": "break_budget", "label": "Go and buy extra snacks too", "icon": "🍿" }
       ]
     },
     {
       "step": 3,
-      "prompt": "You see something you want online.",
+      "prompt": "You see $60 headphones on sale. You have $25 left to spend this week.",
       "options": [
-        { "id": "buy", "label": "Buy it", "icon": "🛍️" },
-        { "id": "wait", "label": "Wait", "icon": "⏳" }
+        { "id": "save_goal", "label": "Save up for a few weeks", "icon": "🎯" },
+        { "id": "buy_now", "label": "Buy now, worry later", "icon": "💳" }
       ]
     },
     {
       "step": 4,
-      "prompt": "You remember a goal.",
+      "prompt": "You're saving for a $100 gaming controller. You have $60 saved.",
       "options": [
-        { "id": "goal", "label": "Save for goal", "icon": "🎯" },
-        { "id": "forget", "label": "Forget it", "icon": "🙈" }
+        { "id": "keep_saving", "label": "Keep saving", "icon": "💰" },
+        { "id": "spend_savings", "label": "Spend some on other stuff", "icon": "🛍️" }
       ]
     },
     {
       "step": 5,
-      "prompt": "You get another small payment.",
+      "prompt": "You earn another $20 doing chores. Your savings goal is so close!",
       "options": [
-        { "id": "split", "label": "Save some", "icon": "⚖️" },
-        { "id": "spend_all", "label": "Spend all", "icon": "💸" }
+        { "id": "add_savings", "label": "Add to savings goal", "icon": "⬆️" },
+        { "id": "treat_yourself", "label": "Treat yourself instead", "icon": "🎉" }
       ]
     },
     {
       "step": 6,
-      "prompt": "End of the week.",
+      "prompt": "End of the month. You check your savings.",
       "options": [
-        { "id": "reflect", "label": "Feel proud", "icon": "😊" },
-        { "id": "regret", "label": "Wish you saved more", "icon": "😬" }
+        { "id": "hit_goal", "label": "You hit your goal!", "icon": "🎊" },
+        { "id": "fell_short", "label": "You fell short", "icon": "😔" }
       ]
     }
   ]

@@ -1,54 +1,54 @@
 {
   "id": "school",
   "title": "SCHOOL ADVENTURE",
-  "subtitle": "You’re going through a school week and making choices.",
+  "subtitle": "You're managing money and choices during a school week.",
   "steps": [
     {
       "step": 1,
-      "prompt": "It’s the morning before school. What do you do?",
+      "prompt": "Lunch choice: $5 school lunch or bring lunch from home (costs $2)?",
       "options": [
-        { "id": "pack_lunch", "label": "Pack lunch", "icon": "🥪" },
+        { "id": "pack_lunch", "label": "Bring lunch - save $3", "icon": "🥪" },
         { "id": "buy_lunch", "label": "Buy lunch at school", "icon": "🍕" }
       ]
     },
     {
       "step": 2,
-      "prompt": "You’re getting ready for class.",
+      "prompt": "You forgot your pencil. Friend offers to sell you one for $1.",
       "options": [
-        { "id": "bring_supplies", "label": "Bring school supplies", "icon": "📘" },
-        { "id": "forget_supplies", "label": "Forget supplies", "icon": "🙈" }
+        { "id": "borrow_free", "label": "Ask to borrow instead", "icon": "🤝" },
+        { "id": "buy_pencil", "label": "Buy it for $1", "icon": "💵" }
       ]
     },
     {
       "step": 3,
-      "prompt": "After school, you have free time.",
+      "prompt": "Book fair! You have $10. One $10 book or two $5 books?",
       "options": [
-        { "id": "do_homework", "label": "Do homework", "icon": "📖" },
-        { "id": "play_games", "label": "Play games", "icon": "🎮" }
+        { "id": "compare_value", "label": "Think about value first", "icon": "🤔" },
+        { "id": "buy_first", "label": "Grab what looks cool", "icon": "😍" }
       ]
     },
     {
       "step": 4,
-      "prompt": "You need something for school tomorrow.",
+      "prompt": "Class trip costs $15. You have $10 saved. It's in 2 weeks.",
       "options": [
-        { "id": "buy_item", "label": "Buy it now", "icon": "🛍️" },
-        { "id": "wait", "label": "Wait and plan", "icon": "⏳" }
+        { "id": "save_plan", "label": "Save $5 more by trip day", "icon": "📅" },
+        { "id": "ask_money", "label": "Ask parents last minute", "icon": "🙏" }
       ]
     },
     {
       "step": 5,
-      "prompt": "Your friends want to hang out.",
+      "prompt": "Fundraiser time! $20 wrapping paper or $20 cookies you'll actually eat?",
       "options": [
-        { "id": "hang_out", "label": "Go hang out", "icon": "🧑‍🤝‍🧑" },
-        { "id": "stay_home", "label": "Stay home and rest", "icon": "🏠" }
+        { "id": "think_value", "label": "Think: what's useful?", "icon": "💭" },
+        { "id": "buy_both", "label": "Buy both!", "icon": "🛍️" }
       ]
     },
     {
       "step": 6,
-      "prompt": "End of the school week. How do you feel?",
+      "prompt": "End of week. You tracked your spending and saved $8!",
       "options": [
-        { "id": "prepared", "label": "Prepared for next week", "icon": "😊" },
-        { "id": "overwhelmed", "label": "A bit overwhelmed", "icon": "😬" }
+        { "id": "keep_saving", "label": "Keep saving streak going", "icon": "🔥" },
+        { "id": "learned", "label": "Proud of what I learned", "icon": "🧠" }
       ]
     }
   ]

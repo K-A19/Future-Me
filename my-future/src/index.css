@@ -126,9 +126,54 @@ body {
   width: 70%;
 }
 
+.stat-value {
+  font-size: 11px;
+  color: #3d231f;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 2px;
+}
+
 /* Main content area */
 .map-wrapper {
   flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Scenarios wrapper for new modal-based gameplay */
+.scenarios-wrapper {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px;
+  gap: 20px;
+}
+
+.scenarios-header {
+  text-align: center;
+  color: white;
+}
+
+.scenarios-header h1 {
+  font-size: 36px;
+  margin: 0 0 10px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.scenarios-header p {
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.95;
+}
   position: relative;
   width: 100%;
   height: 100%;

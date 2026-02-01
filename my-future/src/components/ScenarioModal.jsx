@@ -1,0 +1,145 @@
+import React, { useState, useMemo } from 'react';
+import './ScenarioModal.css';
+import { useGameContext } from '../context/GameContext';
+
+/**
+ * ScenarioModal - Displays game scenarios as popup modals
+ * Shows choices and immediate feedback on stat changes
+ */
+const ScenarioModal = ({ 
+  scenario, 
+  step, 
+  onChoiceMade, 
+  onClose 
+}) => {
+  const { stats, makeChoice } = useGameContext();
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [feedbackStats, setFeedbackStats] = useState(null);
+
+  if (!scenario || !step) return null;
+
+  // Randomize choice order (left/right positions) for each step
+  const shuffledOptions = useMemo(() => {
+    return [...step.options].sort(() => Math.random() - 0.5);
+  }, [step]);
+
+  const handleChoiceClick = (choiceId) => {
+    // Make the choice and get updated stats
+    const oldStats = stats;
+    const newStats = makeChoice(choiceId);
+
+    // Calculate changes
+    const changes = {
+      savings: newStats.savings - oldStats.savings,
+      happiness: newStats.happiness - oldStats.happiness,
+      moneySmarts: newStats.moneySmarts - oldStats.moneySmarts,
+    };
+
+    setSelectedChoice(choiceId);
+    setFeedbackStats({ newStats, changes });
+    setShowFeedback(true);
+
+    // Call the callback after a brief delay to show feedback
+    setTimeout(() => {
+      onChoiceMade(choiceId);
+      setShowFeedback(false);
+      setSelectedChoice(null);
+      setFeedbackStats(null);
+    }, 2000);
+  };
+
+  const currentOption = step.options.find(opt => opt.id === selectedChoice);
+
+  return (
+    <div className="scenario-modal-overlay" onClick={onClose}>
+      <div className="scenario-modal" onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
+        <div className="scenario-header">
+          <h2>{scenario.title}</h2>
+          <button className="close-btn" onClick={onClose}>✕</button>
+        </div>
+
+        {/* Main Content */}
+        {!showFeedback ? (
+          <>
+            {/* Subtitle */}
+            <div className="scenario-subtitle">
+              {scenario.subtitle}
+            </div>
+
+            {/* Prompt */}
+            <div className="scenario-prompt">
+              {step.prompt}
+            </div>
+
+            {/* Choices */}
+            <div className="choices-container">
+              {shuffledOptions.map((option) => (
+                <button
+                  key={option.id}
+                  className="choice-button"
+                  onClick={() => handleChoiceClick(option.id)}
+                >
+                  <div className="choice-icon">{option.icon}</div>
+                  <div className="choice-label">{option.label}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Current Stats */}
+            <div className="current-stats">
+              <div className="stat-item">
+                <span className="stat-emoji">💰</span>
+                <span className="stat-text">${stats.savings}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-emoji">😊</span>
+                <span className="stat-text">{stats.happiness}</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-emoji">🧠</span>
+                <span className="stat-text">{stats.moneySmarts}</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Feedback Screen */
+          <div className="feedback-screen">
+            <div className="feedback-choice">
+              <div className="feedback-icon">{currentOption.icon}</div>
+              <div className="feedback-label">{currentOption.label}</div>
+            </div>
+
+            <div className="stat-changes">
+              <div className={`stat-change ${feedbackStats.changes.savings > 0 ? 'positive' : feedbackStats.changes.savings < 0 ? 'negative' : 'neutral'}`}>
+                <span className="emoji">💰</span>
+                <span className="change-text">
+                  Savings: {feedbackStats.changes.savings > 0 ? '+' : ''}{feedbackStats.changes.savings}
+                </span>
+              </div>
+              <div className={`stat-change ${feedbackStats.changes.happiness > 0 ? 'positive' : feedbackStats.changes.happiness < 0 ? 'negative' : 'neutral'}`}>
+                <span className="emoji">😊</span>
+                <span className="change-text">
+                  Happiness: {feedbackStats.changes.happiness > 0 ? '+' : ''}{feedbackStats.changes.happiness}
+                </span>
+              </div>
+              <div className={`stat-change ${feedbackStats.changes.moneySmarts > 0 ? 'positive' : feedbackStats.changes.moneySmarts < 0 ? 'negative' : 'neutral'}`}>
+                <span className="emoji">🧠</span>
+                <span className="change-text">
+                  Smarts: {feedbackStats.changes.moneySmarts > 0 ? '+' : ''}{feedbackStats.changes.moneySmarts}
+                </span>
+              </div>
+            </div>
+
+            <div className="feedback-animation">
+              ✨ Choice Applied! ✨
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ScenarioModal;

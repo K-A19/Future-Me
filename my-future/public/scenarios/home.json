@@ -1,0 +1,87 @@
+{
+  "id": "home",
+  "title": "HOME ADVENTURE",
+  "subtitle": "You have $25 spending money this week at home.",
+  "steps": [
+    {
+      "step": 1,
+      "prompt": "After school, you're hungry. Delivery is $12, cooking costs $3.",
+      "options": [
+        { "id": "cook", "label": "Cook at home - save $9", "icon": "🍳" },
+        { "id": "delivery", "label": "Order delivery", "icon": "🛵" }
+      ]
+    },
+    {
+      "step": 2,
+      "prompt": "You want something sweet. Store candy is $4, home snack is free.",
+      "options": [
+        { "id": "home_snack", "label": "Use what's at home", "icon": "🍎" },
+        { "id": "buy_snack", "label": "Buy candy at store", "icon": "🍫" }
+      ]
+    },
+    {
+      "step": 3,
+      "prompt": "You see a $20 shirt online. You have $18 left this week.",
+      "options": [
+        { "id": "wait_24", "label": "Wait 24 hours to decide", "icon": "⏳" },
+        { "id": "buy_now", "label": "Buy it now", "icon": "🛍️" }
+      ]
+    },
+    {
+      "step": 4,
+      "prompt": "Game night! New game is $15, but you have free games at home.",
+      "options": [
+        { "id": "use_free", "label": "Play something free", "icon": "🆓" },
+        { "id": "new_game", "label": "Buy the new game", "icon": "🎮" }
+      ]
+    },
+    {
+      "step": 5,
+      "prompt": "Electricity costs money. Lights, TV, charger are all on but you're not using them.",
+      "options": [
+        { "id": "turn_off", "label": "Turn things off - save money", "icon": "🔌" },
+        { "id": "leave_on", "label": "Leave it all on", "icon": "💡" }
+      ]
+    },
+    {
+      "step": 6,
+      "prompt": "You want a new outfit. New is $25, but you could swap with a friend.",
+      "options": [
+        { "id": "swap_reuse", "label": "Swap or reuse - free!", "icon": "♻️" },
+        { "id": "brand_new", "label": "Buy new for $25", "icon": "👕" }
+      ]
+    },
+    {
+      "step": 7,
+      "prompt": "Streaming service offers a free trial, then $10/month. Do you need it?",
+      "options": [
+        { "id": "skip_trial", "label": "Skip it - easy to forget to cancel", "icon": "🚫" },
+        { "id": "start_trial", "label": "Start the trial", "icon": "🆕" }
+      ]
+    },
+    {
+      "step": 8,
+      "prompt": "You get $20 allowance! What's your first move?",
+      "options": [
+        { "id": "save_some", "label": "Save half, spend half", "icon": "💰" },
+        { "id": "spend_some", "label": "Spend it all", "icon": "💸" }
+      ]
+    },
+    {
+      "step": 9,
+      "prompt": "Your friend wants to go out - it'll cost $8. Do you have room in your budget?",
+      "options": [
+        { "id": "check_budget", "label": "Check your budget first", "icon": "📊" },
+        { "id": "just_go", "label": "Just go, figure it out later", "icon": "🤷" }
+      ]
+    },
+    {
+      "step": 10,
+      "prompt": "End of the week. You track your money and still have $12 left!",
+      "options": [
+        { "id": "proud", "label": "Proud of my choices!", "icon": "😊" },
+        { "id": "learned", "label": "I learned so much!", "icon": "🧠" }
+      ]
+    }
+  ]
+}
