@@ -68,13 +68,12 @@ body {
   flex-direction: column;
   gap: 20px;
   /* Updated border color */
-  border-left: 3px solid #a15447;
   flex-shrink: 0;
 }
 
 .sidebar-logo {
   /* This magic line pushes the logo to the bottom of the flex container */
-  margin-top: 240px; 
+  margin-top: 200px; 
   
   width: 140%;
   max-width: 600px;
@@ -146,43 +145,37 @@ body {
   position: absolute;
   cursor: pointer;
   transition: all 0.3s ease;
-  /* Updated border to white-cream */
-  border: 3px solid #fff9f5;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
+  
+  /* Make the box invisible */
+  background-color: rgba(255, 255, 255, 0); 
+  border: 2px solid transparent; 
+  
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: bold;
-  backdrop-filter: blur(2px);
+  z-index: 5;
 }
 
-.clickable-area:hover {
-  background-color: rgba(255, 255, 255, 0.4);
-  /* Updated border-color on hover */
-  border-color: #fff;
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
+
+
 
 .clickable-area:active {
   transform: scale(0.98);
 }
 
 /* Building positions kept the same */
-.school-btn { top: 15%; left: 10%; width: 18%; height: 40%; position: absolute; }
+.school-btn { top: 10%; left: 22%; width: 20%; height: 43%; position: absolute; }
 .home-btn { bottom: 18%; left: 5%; width: 16%; height: 28%; position: absolute; }
-.grocery-btn { top: 14%; right: 22%; width: 20%; height: 32%; position: absolute; }
-.office-btn { bottom: 14%; right: 10%; width: 20%; height: 32%; position: absolute; }
+.grocery-btn { top: 8%; right: 18%; width: 20%; height: 32%; position: absolute; }
+.office-btn { bottom: 1%; right: 20%; width: 20%; height: 32%; position: absolute; }
 
 .location-label {
   position: absolute;
-  bottom: -40px;
+  /* Adjust 'top' so it sits above the invisible shape */
+  top: -20px; 
   left: 50%;
   transform: translateX(-50%);
-  /* Updated label colors */
   background-color: #cc6d5e;
   color: #fff9f5;
   padding: 8px 15px;
@@ -190,14 +183,18 @@ body {
   font-weight: bold;
   font-size: 14px;
   white-space: nowrap;
+  
+  /* HIDDEN STATE */
   opacity: 0;
-  transition: opacity 0.3s ease;
   pointer-events: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  z-index: 10;
 }
 
 .clickable-area:hover .location-label {
   opacity: 1;
+  top: -40px; /* Moves up slightly for a 'popup' feel */
 }
 
 /* Tablet and below */
@@ -221,4 +218,8 @@ body {
 @media (max-width: 480px) {
   .title { font-size: 14px; padding: 8px 15px; }
   .location-label { font-size: 10px; padding: 4px 8px; bottom: -25px; }
+}
+
+.back-button {
+  width:fit-content;
 }
