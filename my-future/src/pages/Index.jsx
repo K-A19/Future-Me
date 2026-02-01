@@ -11,6 +11,15 @@ const Index = () => {
     console.log(`Navigating to ${location}...`);
   };
 
+  const createNewCharacter = () => {
+    const confirmReset = window.confirm("Start fresh? This will delete all your current stats.");
+    
+    if (confirmReset) {
+      localStorage.clear(); // Wipes local storage
+      window.location.reload(); // Refreshes the app state
+    }
+  };
+
   return (
     <div className="page-wrapper">
       {/* Player Stats Sidebar */}
@@ -40,6 +49,7 @@ const Index = () => {
           </div>
           <div className="stat-value">{stats.moneySmarts}</div>
         </div>
+        <button className="reset-button" onClick={createNewCharacter}> NEW CHARACTER</button>
         <img
           src="../../images/futuremelogo.png"
           alt="Future Me Logo"

@@ -49,53 +49,65 @@ const PlayerProfile = ({ size = '200px' }) => {
    * Dizzy + Laughing + RaisedExcited = "You're smart, secure, AND happy. That's what money is for."
    */
   const getExpression = () => {
-    const { savings, lifeBalance, moneySkills } = stats;
+  const { savings, lifeBalance, moneySkills } = stats;
 
-    let eyeType = 'Default';
-    let mouthType = 'Smile';
-    let eyebrowType = 'Default';
+  // 1. Calculate Average Vibe (0-200)
+  const average = (savings + lifeBalance + moneySkills) / 3;
 
-    // ===== EYES based on Money Skills (0-200) =====
-    if (moneySkills < 40) {
-      eyeType = 'Confused';  // 0-40: "I don't really get money yet"
-    } else if (moneySkills < 90) {
-      eyeType = 'Default';   // 40-90: "I'm learning and starting to understand"
-    } else if (moneySkills < 150) {
-      eyeType = 'Happy';     // 90-150: "I know what I'm doing"
-    } else {
-      eyeType = 'Dizzy';     // 150-200: "Money expert—my brain is FULL!"
-    }
+  // 2. Calculate Tension (How far apart are the stats?)
+  // High tension = a "Conflicted" face (e.g., rich but stressed and unskilled)
+  const max = Math.max(savings, lifeBalance, moneySkills);
+  const min = Math.min(savings, lifeBalance, moneySkills);
+  const tension = max - min;
 
-    // ===== MOUTH based on Life Balance (0-200) =====
-    if (lifeBalance < 40) {
-      mouthType = 'Sad';      // 0-40: "This isn't fun anymore"
-    } else if (lifeBalance < 80) {
-      mouthType = 'Concerned'; // 40-80: "I'm stressed or overwhelmed"
-    } else if (lifeBalance < 140) {
-      mouthType = 'Smile';     // 80-140: "Life feels balanced"
-    } else {
-      mouthType = 'Laughing';  // 140-200: "I'm thriving!"
-    }
+  let eyeType = 'Default';
+  let mouthType = 'Serious';
+  let eyebrowType = 'Default';
 
-    // ===== EYEBROWS based on Savings (0-200) =====
-    if (savings < 40) {
-      eyebrowType = 'SadConcerned'; // 0-40: "I don't feel safe with money"
-    } else if (savings < 80) {
-      eyebrowType = 'AngryNatural'; // 40-80: "This is stressful"
-    } else if (savings < 130) {
-      eyebrowType = 'Default';       // 80-130: "I'm okay for now"
-    } else if (savings < 170) {
-      eyebrowType = 'FlatNatural';   // 130-170: "I feel secure"
-    } else {
-      eyebrowType = 'RaisedExcited'; // 170-200: "I'm confident about my future!"
-    }
+  // --- BASE EMOTION (The Average) ---
+  if (average < 60) {
+    // Struggling overall
+    eyeType = 'Default';
+    mouthType = 'Sad';
+    eyebrowType = 'SadConcerned';
+  } else if (average < 140) {
+    // Doing okay / Middle ground
+    eyeType = 'Default';
+    mouthType = 'Twinkle';
+    eyebrowType = 'Default';
+  } else {
+    // Excellence
+    eyeType = 'Happy';
+    mouthType = 'Smile';
+    eyebrowType = 'RaisedExcited';
+  }
 
-    return {
-      eyeType,
-      mouthType,
-      eyebrowType,
-    };
-  };
+  // --- THE "BALANCE" POLISH (Tension Adjustments) ---
+
+  // CRITICAL FAILURE: If any one stat is abysmal, it "taints" the expression
+  if (min < 30) {
+    eyeType = (moneySkills < 30) ? 'Cry' : eyeType;
+    mouthType = (lifeBalance < 30) ? 'Grimace' : 'Serious';
+    eyebrowType = 'SadConcerned';
+  }
+
+  // THE CONFLICTED LOOK: If stats are wildly different (High Tension)
+  if (tension > 100) {
+    // The "I have money but no life/skills" look
+    eyeType = 'Default'; 
+    eyebrowType = 'UpDown'; // One up, one down shows confusion/imbalance
+    mouthType = 'Serious';
+  }
+
+  // THE "ZEN" LOOK: If stats are very close together and high (Low Tension)
+  if (tension < 40 && average > 150) {
+    eyeType = 'Hearts'; // Only get the "Best" eyes if stats are balanced AND high
+    mouthType = 'Smile';
+    eyebrowType = 'Default'; // Calm, confident brow
+  }
+
+  return { eyeType, mouthType, eyebrowType };
+};
 
   const expression = getExpression();
   const avatarConfig = {

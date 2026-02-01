@@ -10,6 +10,7 @@ import ProtectedRoute from './pages/ProtectedRoute';
 import AvatarCustomizer from './pages/AvatarCustomizer';
 
 function App() {
+  // PLACE THE FUNCTION HERE
   return (
     <GameProvider>
       <Router>

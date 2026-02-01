@@ -57,6 +57,23 @@ body {
   display: flex;
   flex-direction: row-reverse;
   overflow: hidden;
+/* 1. Explicitly remove any flex gap */
+  gap: 0; 
+}
+
+/* 2. Ensure children have no margins and "touch" each other */
+.player-sidebar, .map-wrapper {
+  margin: 0;
+  border: none; /* Borders can sometimes look like small gaps */
+}
+
+/* 3. Ensure the map takes up ALL remaining space */
+.map-wrapper {
+  flex: 1;          /* This is the key! It fills the gap on the left */
+  width: auto;      /* Remove any fixed widths like 90% */
+  max-width: none;  /* Remove any max-width constraints */
+  margin: 0;
+  padding: 0;
 }
 
 /* Player stats sidebar */
@@ -69,23 +86,64 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
-  border-right: 3px solid #cc6d5e;
   overflow-y: auto;
   overflow-x: hidden;
   /* Updated border color */
   flex-shrink: 0;
 }
 
-.sidebar-logo {
-  /* This magic line pushes the logo to the bottom of the flex container */
-  margin-top: 200px; 
+/* The Button - Styled with your Terracotta theme */
+.reset-button {
+ /* 1. Fix the display and background */
+  display: block; 
+  background-color: #cc6d5e; /* Added actual color */
   
-  width: 140%;
+  /* 2. Fix the width */
+  width: 100%; /* Changed from 10% to 100% so it fits the sidebar width */
+  
+  /* 3. Spacing */
+  margin-top: 200px; 
+  padding: 12px 5px;
+
+  /* 4. Colors & Borders */
+  color: #fff9f5;            /* Soft Cream */
+  border: 2px solid #ded9d8; /* Dark brown */
+  border-radius: 8px;
+  
+  /* 5. Typography */
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  letter-spacing: 1px;
+  
+  /* 6. Effects */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 0px #a09897; /* Retro "thick" button look */
+  
+  /* 7. Ensure it stays in front */
+  position: relative;
+  z-index: 10;
+}
+
+.reset-button:hover {
+  background-color: #a15447;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0px #7e5c56;
+}
+
+.reset-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px #97665e;
+}
+
+.sidebar-logo {
+  
+  width: 160%;
   max-width: 600px;
   height : auto; /* Adjust size to fit your sidebar width */
   align-self: center; /* Centers it horizontally */
-  padding-top: 20px; /* Gives it some breathing room from the last stat bar */
+  padding-top: 5px; /* Gives it some breathing room from the last stat bar */
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
 }
 
