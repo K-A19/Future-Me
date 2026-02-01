@@ -59,7 +59,7 @@ body {
 
 /* Player stats sidebar */
 .player-sidebar {
-  width: 240px;
+  width: 260px;
   height: 150%;
   /* Updated to semi-transparent cream */
   background-color: rgba(255, 249, 245, 0.8);
