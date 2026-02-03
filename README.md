@@ -1,73 +1,61 @@
-# Future Me: Bridging the Financial Empowerment Gap
+Future Me: Bridging the Financial Empowerment Gap
 
-**Future Me** is an interactive, gamified web experience designed to combat declining financial literacy rates. By visualizing the long-term consequences of daily choices through a reactive digital avatar, the application equips users with the agency to master their own futures.
+Future Me is an interactive, gamified web experience designed to introduce financial literacy in a way that feels approachable and engaging. By visualizing the long-term impact of everyday choices through a digital avatar, the application helps users better understand how small decisions around money can shape their future over time.
 
----
+The Problem
 
-### The Problem
+Financial literacy is often introduced too late, after habits have already formed and money feels intimidating or abstract. As digital transactions become increasingly removed from physical money, it’s harder for young people to understand how saving, spending, and balance connect to real outcomes. This gap can lead to short-term decision-making without a clear sense of long-term impact.
 
-Current educational frameworks are struggling to address a global crisis in **personal agency**. As digital transactions become more abstract, the fundamental understanding of how money, time, and skills interconnect is disappearing. This "literacy gap" creates a present-bias trap where long-term financial empowerment is compromised for short-term gratification.
+Our Solution
 
-### Our Solution
+Future Me turns financial decision-making into an interactive experience. Instead of charts or spreadsheets, users move through familiar environments and make scenario-based choices. A reactive avatar and changing stats help visualize how those choices affect different aspects of their life, encouraging reflection rather than rule-following.
 
-**Future Me** transforms abstract data into an emotional experience. Instead of cold spreadsheets, users interact with a **dynamic life-map** and a **reactive avatar** that physically manifests the "health" of their life choices.
+Key Features
 
----
+Stat-Based Feedback System: The game tracks three core areas that change based on player decisions:
 
-### Key Features
+Savings: A reflection of financial security.
 
-* **Holistic Stat Tracking:** Unlike traditional budgeters, we track the delicate tension between:
-* **Savings:** Your financial floor.
-* **Life Balance:** Your mental and physical well-being.
-* **Money Skills:** Your ability to navigate complex economic systems.
+Life Balance: Overall well-being and stability.
 
+Money Skills: Understanding and confidence around financial decisions.
 
-* **Reactive Avatar System:** An integrated character profile that changes expressions based on your current stats, utilizing empathy to drive better decision-making.
-* **Interactive Life-Map:** Navigate between "Home," "School," "Grocery Store," and "Office" to make choices that shift your trajectory in real-time.
-* **One-Touch Reset:** A "New Character" function that allows users to experiment with different life strategies without permanent risk.
+Reactive Avatar: A customizable avatar that visually responds to the player’s current stats, helping reinforce the impact of decisions in a more intuitive way.
 
----
+Scenario-Based Gameplay: Players navigate environments such as Home, School, and the Grocery Store, where they face everyday situations involving financial trade-offs.
 
-### Technology Stack
+Reset & Replay: A reset option allows players to experiment with different decision patterns without permanent consequences.
 
-* **Frontend:** React.js
-* **State Management:** React Context API
-* **Routing:** React Router DOM
-* **Styling:** Custom CSS3 with a warm, "Terracotta and Cream" palette.
-* **Deployment:** Optimized for hosting on **DigitalOcean App Platform**.
+Technology Stack
 
----
+Frontend: React.js
 
-### Getting Started
+State Management: React Context API
 
-1. **Clone the Repository**
-```bash
+Routing: React Router DOM
+
+Styling: Custom CSS3 with a warm, “Terracotta and Cream” palette
+
+Getting Started
+
+Clone the Repository
+
 git clone https://github.com/your-username/future-me.git
 cd future-me
 
-```
 
+Install Dependencies
 
-2. **Install Dependencies**
-```bash
 npm install
 
-```
 
+Run the App
 
-3. **Run the App**
-```bash
 npm start
 
-```
 
+The application will be available at http://localhost:3000.
 
-The application will be available at `http://localhost:3000`.
+Why Future Me
 
----
-
-### Empowerment Through Literacy
-
-By focusing on **Equilibrium**, this project teaches that true empowerment isn't just about maxing out one stats — it's about the ability to maintain a balanced life while building a secure future.
-
----
+Rather than focusing on maximizing a single stat, Future Me emphasizes balance. The goal is to help users see that financial empowerment comes from understanding trade-offs and maintaining equilibrium over time, not from making “perfect” choices every time.
